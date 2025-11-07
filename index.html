@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ulastate - Fruit Value Calculator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 500px;
+            width: 100%;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+
+        h1 {
+            color: #667eea;
+            text-align: center;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        select, input[type="number"] {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+            background: white;
+        }
+
+        select:focus, input[type="number"]:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .checkbox-item:hover {
+            border-color: #667eea;
+            background: #f5f7ff;
+        }
+
+        .checkbox-item input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
+            cursor: pointer;
+        }
+
+        .checkbox-item label {
+            margin: 0;
+            font-weight: normal;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .result {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 30px;
+            display: none;
+        }
+
+        .result.show {
+            display: block;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-label {
+            font-size: 14px;
+            opacity: 0.9;
+            margin-bottom: 5px;
+        }
+
+        .result-value {
+            font-size: 36px;
+            font-weight: bold;
+        }
+
+        button {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .checkbox-group {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🍎 Ulastate</h1>
+        <div class="subtitle">Fruit Value Calculator</div>
+
+        <form id="fruitForm">
+            <div class="form-group">
+                <label for="fruitType">Fruit Type</label>
+                <select id="fruitType" required>
+                    <option value="">Select a fruit...</option>
+                    <option value="sakura">Sakura</option>
+                    <option value="pea">Pea</option>
+                    <option value="apple">Apple</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="weight">Weight</label>
+                <input type="number" id="weight" step="0.01" min="0" placeholder="e.g., 10.2 or 5.96" required>
+            </div>
+
+            <div class="form-group">
+                <label for="mutation">Mutation</label>
+                <select id="mutation" required>
+                    <option value="none">None</option>
+                    <option value="gold">Gold</option>
+                    <option value="prismatic">Prismatic</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label>Weather Effects (select multiple)</label>
+                <div class="checkbox-group">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="dust" name="weather" value="dust">
+                        <label for="dust">Dust</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="lightning" name="weather" value="lightning">
+                        <label for="lightning">Lightning</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="rainbow" name="weather" value="rainbow">
+                        <label for="rainbow">Rainbow</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="terror" name="weather" value="terror">
+                        <label for="terror">Terror</label>
+                    </div>
+                </div>
+            </div>
+
+            <button type="submit">Calculate Value</button>
+        </form>
+
+        <div id="result" class="result">
+            <div class="result-label">Fruit Value</div>
+            <div class="result-value" id="resultValue">0</div>
+        </div>
+    </div>
+
+    <script>
+        // Base prices for each fruit type
+        const basePrices = {
+            sakura: 100,
+            pea: 50,
+            apple: 75
+        };
+
+        // Mutation multipliers
+        const mutationMultipliers = {
+            none: 1.0,
+            gold: 1.5,
+            prismatic: 2.0
+        };
+
+        // Weather effect multipliers
+        const weatherMultipliers = {
+            dust: 0.9,
+            lightning: 1.2,
+            rainbow: 1.3,
+            terror: 0.8
+        };
+
+        document.getElementById('fruitForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            calculateFruitValue();
+        });
+
+        function calculateFruitValue() {
+            // Get form values
+            const fruitType = document.getElementById('fruitType').value;
+            const weight = parseFloat(document.getElementById('weight').value);
+            const mutation = document.getElementById('mutation').value;
+            
+            // Get selected weather effects
+            const weatherCheckboxes = document.querySelectorAll('input[name="weather"]:checked');
+            const selectedWeather = Array.from(weatherCheckboxes).map(cb => cb.value);
+
+            // Validate inputs
+            if (!fruitType || isNaN(weight) || weight <= 0) {
+                alert('Please fill in all required fields with valid values.');
+                return;
+            }
+
+            // Calculate base value
+            let value = basePrices[fruitType] * weight;
+
+            // Apply mutation multiplier
+            value *= mutationMultipliers[mutation];
+
+            // Apply weather effect multipliers
+            selectedWeather.forEach(weather => {
+                value *= weatherMultipliers[weather];
+            });
+
+            // Round to 2 decimal places
+            value = Math.round(value * 100) / 100;
+
+            // Display result
+            document.getElementById('resultValue').textContent = value.toFixed(2);
+            document.getElementById('result').classList.add('show');
+        }
+
+        // Auto-calculate on any input change (optional enhancement)
+        const inputs = document.querySelectorAll('select, input');
+        inputs.forEach(input => {
+            input.addEventListener('change', function() {
+                const form = document.getElementById('fruitForm');
+                if (form.checkValidity()) {
+                    calculateFruitValue();
+                }
+            });
+        });
+    </script>
+</body>
+</html>
