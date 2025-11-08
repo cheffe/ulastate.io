@@ -390,6 +390,25 @@
                 }
             });
         });
+
+        // Make checkbox-item divs clickable for better mobile experience
+        const checkboxItems = document.querySelectorAll('.checkbox-item');
+        checkboxItems.forEach(item => {
+            item.addEventListener('click', function(e) {
+                // Don't toggle if the click was directly on the checkbox or label
+                // (they handle it themselves)
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'LABEL') {
+                    return;
+                }
+                // Find the checkbox inside this item and toggle it
+                const checkbox = this.querySelector('input[type="checkbox"]');
+                if (checkbox) {
+                    checkbox.checked = !checkbox.checked;
+                    // Trigger change event for auto-calculation
+                    checkbox.dispatchEvent(new Event('change'));
+                }
+            });
+        });
     </script>
 </body>
 </html>
