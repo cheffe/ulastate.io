@@ -303,8 +303,8 @@
         // Mutation multipliers
         const mutationMultipliers = {
             none: 1.0,
-            gold: 1.5,
-            prismatic: 2.0
+            gold: 20,
+            prismatic: 50
         };
 
         // Weather effect multipliers
@@ -347,12 +347,16 @@
             value *= mutationMultipliers[mutation];
 
             // Apply weather effect multipliers
+            let weatherMultiplier = 0;
             selectedWeather.forEach(weather => {
-                value *= weatherMultipliers[weather];
+                weatherMultiplier += weatherMultipliers[weather];
             });
-
+            if (weatherMultiplier === 0) {
+                weatherMultiplier = 1;
+            }
+            value *= weatherMultiplier;
             // Round to 2 decimal places
-            value = Math.round(value * 100) / 100;
+            value = Math.floor(value);
 
             // Display result
             document.getElementById('resultValue').textContent = value.toFixed(2);
