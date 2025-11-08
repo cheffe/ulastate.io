@@ -316,6 +316,30 @@
             strawberry: 74.75,
             carrot: 40
         };
+        
+        // Default weight for each fruit type
+        const defaultWeights = {
+            sakura: 8,
+            saturn: 7,
+            lip: 6,
+            raffle: 16,
+            lotus: 10,
+            gberry: 14,
+            pbell: 11,
+            bbell: 13,
+            iron: 8,
+            pea: 9,
+            cactus: 8,
+            chomper: 3.5,
+            melon: 2,
+            pumpkin: 5,
+            pitcher: 0.17,
+            apple: 0.3,
+            mushroom: 0.5,
+            dandelion: 0.15,
+            strawberry: 0.3,
+            carrot: 1.2
+        };
 
         // Mutation multipliers
         const mutationMultipliers = {
@@ -335,6 +359,11 @@
             cold: 3,
             moist: 2
         };
+
+        document.getElementById('fruitType').addEventListener('change', function() {
+            const fruitType = document.getElementById('fruitType').value;
+            document.getElementById('weight').value = defaultWeights[fruitType];
+        });
 
         document.getElementById('fruitForm').addEventListener('submit', function(e) {
             e.preventDefault();
