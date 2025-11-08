@@ -352,11 +352,11 @@
                 weatherMultiplier = 1;
             }
             value *= weatherMultiplier;
-            // Round to 2 decimal places
+            
             value = Math.floor(value);
 
             // Display result
-            document.getElementById('resultValue').textContent = value.toFixed(2);
+            document.getElementById('resultValue').textContent = value;
             document.getElementById('result').classList.add('show');
         }
 
