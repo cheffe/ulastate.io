@@ -358,19 +358,19 @@
             }
 
             // Calculate base value
-            let value = basePrices[fruitType] * weight^2;
+            const weightValue = basePrices[fruitType] * (weight * weight);
 
-            // Apply mutation multiplier
-            value *= mutationMultipliers[mutation];
+            // mutation factor
+            const mutationFactor = mutationMultipliers[mutation];
 
-            // Apply weather effect multipliers
-            let weatherMultiplier = 0;
+            // collect weather effect multipliers
+            let weatherFactor = 0;
             selectedWeather.forEach(weather => {
-                weatherMultiplier += weatherMultipliers[weather];
+                weatherFactor += weatherMultipliers[weather];
             });
-            value *= Math.max(weatherMultiplier, 1);
+            weatherFactor = Math.max(weatherFactor, 1);
             
-            value = Math.floor(value);
+            const value = Math.floor(weightValue * mutationFactor * weatherFactor);
             const numberToDisplay = new Intl.NumberFormat().format(value);
 
             // Display result
