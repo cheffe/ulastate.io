@@ -360,7 +360,7 @@
             moist: 2
         };
 
-        document.getElementById('fruitType').addEventListener('change', function(e) {
+        document.getElementById('fruitType').addEventListener('change', function() {
             const fruitType = document.getElementById('fruitType').value;
             document.getElementById('weight').value = defaultWeights[fruitType];
         });
