@@ -184,33 +184,32 @@
 <body>
     <div class="container">
         <h1>🍎 Ulastate</h1>
-        <div class="subtitle">Fruit Value Calculator</div>
 
         <form id="fruitForm">
             <div class="form-group">
                 <label for="fruitType">Fruit Type</label>
                 <select id="fruitType" required>
                     <option value="">Select a fruit...</option>
-                    <option value="sakura">Sakura</option>
-                    <option value="saturn">Saturn Peach</option>
+                    <option value="apple">Apple</option>
                     <option value="lip">Big-Lip Fruit</option>
-                    <option value="raffle">Rafflesia</option>
-                    <option value="lotus">Snow Lotus</option>
-                    <option value="gberry">Goldenberry</option>
-                    <option value="pbell">Pinkbell</option>
                     <option value="bbell">Bluebell</option>
+                    <option value="cactus">Cactus</option>
+                    <option value="carrot">Carrot</option>
+                    <option value="chomper">Chomper</option>
+                    <option value="dandelion">Dandelion</option>
+                    <option value="gberry">Goldenberry</option>
                     <option value="iron">Ironwood Fruit</option>
                     <option value="pea">Pea</option>
-                    <option value="cactus">Cactus</option>
-                    <option value="chomper">Chomper</option>
-                    <option value="melon">Winter Melon</option>
-                    <option value="pumpkin">Pumpkin</option>
                     <option value="pitcher">Pitcher Plant</option>
-                    <option value="apple">Apple</option>
+                    <option value="pumpkin">Pumpkin</option>
+                    <option value="pbell">Pinkbell</option>
+                    <option value="raffle">Rafflesia</option>
                     <option value="mushroom">Red Mushroom</option>
-                    <option value="dandelion">Dandelion</option>
+                    <option value="saturn">Saturn Peach</option>
+                    <option value="sakura">Sakura</option>
+                    <option value="lotus">Snow Lotus</option>
                     <option value="strawberry">Strawberry</option>
-                    <option value="carrot">Carrot</option>
+                    <option value="melon">Winter Melon</option>
                 </select>
             </div>
 
@@ -247,10 +246,24 @@
                         <input type="checkbox" id="terror" name="weather" value="terror">
                         <label for="terror">Terror</label>
                     </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="air" name="weather" value="air">
+                        <label for="air">Air</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="hazy" name="weather" value="hazy">
+                        <label for="hazy">Hazy</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="cold" name="weather" value="cold">
+                        <label for="cold">Cold</label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="moist" name="weather" value="moist">
+                        <label for="moist">Moist</label>
+                    </div>
                 </div>
             </div>
-
-            <button type="submit">Calculate Value</button>
         </form>
 
         <div id="result" class="result">
@@ -287,16 +300,20 @@
         // Mutation multipliers
         const mutationMultipliers = {
             none: 1.0,
-            gold: 1.5,
-            prismatic: 2.0
+            gold: 20,
+            prismatic: 50
         };
 
         // Weather effect multipliers
         const weatherMultipliers = {
-            dust: 0.9,
-            lightning: 1.2,
-            rainbow: 1.3,
-            terror: 0.8
+            dust: 10,
+            lightning: 10,
+            rainbow: 10,
+            terror: 10,
+            air: 5,
+            hazy: 5,
+            cold: 3,
+            moist: 2
         };
 
         document.getElementById('fruitForm').addEventListener('submit', function(e) {
@@ -327,12 +344,16 @@
             value *= mutationMultipliers[mutation];
 
             // Apply weather effect multipliers
+            let weatherMultiplier = 0;
             selectedWeather.forEach(weather => {
-                value *= weatherMultipliers[weather];
+                weatherMultiplier += weatherMultipliers[weather];
             });
-
+            if (weatherMultiplier === 0) {
+                weatherMultiplier = 1;
+            }
+            value *= weatherMultiplier;
             // Round to 2 decimal places
-            value = Math.round(value * 100) / 100;
+            value = Math.floor(value);
 
             // Display result
             document.getElementById('resultValue').textContent = value.toFixed(2);
