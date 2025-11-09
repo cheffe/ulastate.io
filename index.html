@@ -150,6 +150,23 @@
             font-weight: bold;
         }
 
+        .result-divider {
+            border-top: 2px dashed rgba(255, 255, 255, 0.5);
+            margin: 10px 0;
+        }
+
+        .result-potential-label {
+            font-size: 10px;
+            opacity: 0.8;
+            margin-bottom: 3px;
+        }
+
+        .result-potential-value {
+            font-size: 18px;
+            font-weight: 600;
+            opacity: 0.9;
+        }
+
         button {
             width: 100%;
             padding: 15px;
@@ -198,6 +215,10 @@
 
             .result-value {
                 font-size: 28px;
+            }
+
+            .result-potential-value {
+                font-size: 14px;
             }
         }
     </style>
@@ -290,6 +311,9 @@
         <div id="result" class="result">
             <div class="result-label">Fruit Value</div>
             <div class="result-value" id="resultValue">0</div>
+            <div class="result-divider"></div>
+            <div class="result-potential-label">Potential</div>
+            <div class="result-potential-value" id="resultPotential">0</div>
         </div>
     </div>
 
@@ -393,7 +417,7 @@
             // mutation factor
             const mutationFactor = mutationMultipliers[mutation];
 
-            // collect weather effect multipliers
+            // collect weather effect multipliers for current value
             let weatherFactor = 0;
             selectedWeather.forEach(weather => {
                 weatherFactor += weatherMultipliers[weather];
@@ -403,8 +427,19 @@
             const value = Math.floor(weightValue * mutationFactor * weatherFactor);
             const numberToDisplay = new Intl.NumberFormat().format(value);
 
+            // Calculate potential value (with all weather effects)
+            let allWeatherFactor = 0;
+            Object.keys(weatherMultipliers).forEach(weather => {
+                allWeatherFactor += weatherMultipliers[weather];
+            });
+            allWeatherFactor = Math.max(allWeatherFactor, 1);
+            
+            const potentialValue = Math.floor(weightValue * mutationFactor * allWeatherFactor);
+            const potentialToDisplay = new Intl.NumberFormat().format(potentialValue);
+
             // Display result
             document.getElementById('resultValue').textContent = numberToDisplay;
+            document.getElementById('resultPotential').textContent = potentialToDisplay;
             document.getElementById('result').classList.add('show');
         }
 
