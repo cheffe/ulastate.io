@@ -45,6 +45,40 @@
             font-size: 14px;
         }
 
+        .language-selector {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1000;
+            opacity: 0.33;
+            transition: opacity 0.3s ease;
+        }
+
+        .language-selector:hover,
+        .language-selector:focus-within {
+            opacity: 1;
+        }
+
+        .language-selector select {
+            padding: 8px 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .language-selector select:hover {
+            border-color: #667eea;
+        }
+
+        .language-selector select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
         .form-group {
             margin-bottom: 25px;
         }
@@ -224,100 +258,344 @@
     </style>
 </head>
 <body>
+    <div class="language-selector">
+        <select id="languageSelect" aria-label="Language">
+            <option value="en">🇬🇧</option>
+            <option value="de">🇩🇪</option>
+            <option value="es">🇪🇸</option>
+            <option value="fr">🇫🇷</option>
+        </select>
+    </div>
+
     <div class="container">
         <h1>🍎 Ulastate</h1>
 
         <form id="fruitForm">
             <div class="form-group">
-                <label for="fruitType">Fruit Type</label>
+                <label for="fruitType" data-i18n="label.fruitType">Fruit Type</label>
                 <select id="fruitType" required>
-                    <option value="">Select a fruit...</option>
-                    <option value="apple">Apple</option>
-                    <option value="lip">Big-Lip Fruit</option>
-                    <option value="bbell">Bluebell</option>
-                    <option value="cactus">Cactus</option>
-                    <option value="carrot">Carrot</option>
-                    <option value="chomper">Chomper</option>
-                    <option value="dandelion">Dandelion</option>
-                    <option value="gberry">Goldenberry</option>
-                    <option value="iron">Ironwood Fruit</option>
-                    <option value="pea">Pea</option>
-                    <option value="pitcher">Pitcher Plant</option>
-                    <option value="pumpkin">Pumpkin</option>
-                    <option value="pbell">Pinkbell</option>
-                    <option value="raffle">Rafflesia</option>
-                    <option value="mushroom">Red Mushroom</option>
-                    <option value="saturn">Saturn Peach</option>
-                    <option value="sakura">Sakura</option>
-                    <option value="lotus">Snow Lotus</option>
-                    <option value="strawberry">Strawberry</option>
-                    <option value="melon">Winter Melon</option>
+                    <option value="" data-i18n="option.selectFruit">Select a fruit...</option>
+                    <option value="apple" data-i18n="fruit.apple">Apple</option>
+                    <option value="lip" data-i18n="fruit.lip">Big-Lip Fruit</option>
+                    <option value="bbell" data-i18n="fruit.bbell">Bluebell</option>
+                    <option value="cactus" data-i18n="fruit.cactus">Cactus</option>
+                    <option value="carrot" data-i18n="fruit.carrot">Carrot</option>
+                    <option value="chomper" data-i18n="fruit.chomper">Chomper</option>
+                    <option value="dandelion" data-i18n="fruit.dandelion">Dandelion</option>
+                    <option value="gberry" data-i18n="fruit.gberry">Goldenberry</option>
+                    <option value="iron" data-i18n="fruit.iron">Ironwood Fruit</option>
+                    <option value="pea" data-i18n="fruit.pea">Pea</option>
+                    <option value="pitcher" data-i18n="fruit.pitcher">Pitcher Plant</option>
+                    <option value="pumpkin" data-i18n="fruit.pumpkin">Pumpkin</option>
+                    <option value="pbell" data-i18n="fruit.pbell">Pinkbell</option>
+                    <option value="raffle" data-i18n="fruit.raffle">Rafflesia</option>
+                    <option value="mushroom" data-i18n="fruit.mushroom">Red Mushroom</option>
+                    <option value="saturn" data-i18n="fruit.saturn">Saturn Peach</option>
+                    <option value="sakura" data-i18n="fruit.sakura">Sakura</option>
+                    <option value="lotus" data-i18n="fruit.lotus">Snow Lotus</option>
+                    <option value="strawberry" data-i18n="fruit.strawberry">Strawberry</option>
+                    <option value="melon" data-i18n="fruit.melon">Winter Melon</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label for="weight">Weight</label>
-                <input type="number" id="weight" step="0.01" min="0" placeholder="e.g., 10.2 or 5.96" required>
+                <label for="weight" data-i18n="label.weight">Weight</label>
+                <input type="number" id="weight" step="0.01" min="0" data-i18n-placeholder="placeholder.weight" placeholder="e.g., 10.2 or 5.96" required>
             </div>
 
             <div class="form-group">
-                <label for="mutation">Mutation</label>
+                <label for="mutation" data-i18n="label.mutation">Mutation</label>
                 <select id="mutation" required>
-                    <option value="none">None</option>
-                    <option value="gold">Gold</option>
-                    <option value="prismatic">Prismatic</option>
+                    <option value="none" data-i18n="mutation.none">None</option>
+                    <option value="gold" data-i18n="mutation.gold">Gold</option>
+                    <option value="prismatic" data-i18n="mutation.prismatic">Prismatic</option>
                 </select>
             </div>
 
             <div class="form-group">
-                <label>Weather Effects (select multiple)</label>
+                <label data-i18n="label.weatherEffects">Weather Effects (select multiple)</label>
                 <div class="checkbox-group">
                     <div class="checkbox-item">
                         <input type="checkbox" id="dust" name="weather" value="dust">
-                        <label for="dust">Dust</label>
+                        <label for="dust" data-i18n="weather.dust">Dust</label>
                     </div>
                     <div class="checkbox-item">
                         <input type="checkbox" id="lightning" name="weather" value="lightning">
-                        <label for="lightning">Lightning</label>
+                        <label for="lightning" data-i18n="weather.lightning">Lightning</label>
                     </div>
                     <div class="checkbox-item">
                         <input type="checkbox" id="rainbow" name="weather" value="rainbow">
-                        <label for="rainbow">Rainbow</label>
+                        <label for="rainbow" data-i18n="weather.rainbow">Rainbow</label>
                     </div>
                     <div class="checkbox-item">
                         <input type="checkbox" id="terror" name="weather" value="terror">
-                        <label for="terror">Terror</label>
+                        <label for="terror" data-i18n="weather.terror">Terror</label>
                     </div>
                     <div class="checkbox-item">
                         <input type="checkbox" id="air" name="weather" value="air">
-                        <label for="air">Air</label>
+                        <label for="air" data-i18n="weather.air">Air</label>
                     </div>
                     <div class="checkbox-item">
                         <input type="checkbox" id="hazy" name="weather" value="hazy">
-                        <label for="hazy">Hazy</label>
+                        <label for="hazy" data-i18n="weather.hazy">Hazy</label>
                     </div>
                     <div class="checkbox-item">
                         <input type="checkbox" id="cold" name="weather" value="cold">
-                        <label for="cold">Cold</label>
+                        <label for="cold" data-i18n="weather.cold">Cold</label>
                     </div>
                     <div class="checkbox-item">
                         <input type="checkbox" id="moist" name="weather" value="moist">
-                        <label for="moist">Moist</label>
+                        <label for="moist" data-i18n="weather.moist">Moist</label>
                     </div>
                 </div>
             </div>
         </form>
 
         <div id="result" class="result">
-            <div class="result-label">Fruit Value</div>
+            <div class="result-label" data-i18n="result.fruitValue">Fruit Value</div>
             <div class="result-value" id="resultValue">0</div>
             <div class="result-divider"></div>
-            <div class="result-potential-label">Potential</div>
+            <div class="result-potential-label" data-i18n="result.potential">Potential</div>
             <div class="result-potential-value" id="resultPotential">0</div>
         </div>
     </div>
 
     <script>
+        // Translations
+        const translations = {
+            en: {
+                title: "Ulastate - Fruit Value Calculator",
+                'label.fruitType': "Fruit Type",
+                'option.selectFruit': "Select a fruit...",
+                'label.weight': "Weight",
+                'placeholder.weight': "e.g., 10.2 or 5.96",
+                'label.mutation': "Mutation",
+                'label.weatherEffects': "Weather Effects (select multiple)",
+                'result.fruitValue': "Fruit Value",
+                'result.potential': "Potential",
+                'alert.fillFields': "Please fill in all required fields with valid values.",
+                'fruit.apple': "Apple",
+                'fruit.lip': "Big-Lip Fruit",
+                'fruit.bbell': "Bluebell",
+                'fruit.cactus': "Cactus",
+                'fruit.carrot': "Carrot",
+                'fruit.chomper': "Chomper",
+                'fruit.dandelion': "Dandelion",
+                'fruit.gberry': "Goldenberry",
+                'fruit.iron': "Ironwood Fruit",
+                'fruit.pea': "Pea",
+                'fruit.pitcher': "Pitcher Plant",
+                'fruit.pumpkin': "Pumpkin",
+                'fruit.pbell': "Pinkbell",
+                'fruit.raffle': "Rafflesia",
+                'fruit.mushroom': "Red Mushroom",
+                'fruit.saturn': "Saturn Peach",
+                'fruit.sakura': "Sakura",
+                'fruit.lotus': "Snow Lotus",
+                'fruit.strawberry': "Strawberry",
+                'fruit.melon': "Winter Melon",
+                'mutation.none': "None",
+                'mutation.gold': "Gold",
+                'mutation.prismatic': "Prismatic",
+                'weather.dust': "Dust",
+                'weather.lightning': "Lightning",
+                'weather.rainbow': "Rainbow",
+                'weather.terror': "Terror",
+                'weather.air': "Air",
+                'weather.hazy': "Hazy",
+                'weather.cold': "Cold",
+                'weather.moist': "Moist"
+            },
+            de: {
+                title: "Ulastate - Fruchtwert-Rechner",
+                'label.fruitType': "Fruchtart",
+                'option.selectFruit': "Wählen Sie eine Frucht...",
+                'label.weight': "Gewicht",
+                'placeholder.weight': "z.B., 10.2 oder 5.96",
+                'label.mutation': "Mutation",
+                'label.weatherEffects': "Wettereffekte (mehrere auswählen)",
+                'result.fruitValue': "Fruchtwert",
+                'result.potential': "Potenzial",
+                'alert.fillFields': "Bitte füllen Sie alle erforderlichen Felder mit gültigen Werten aus.",
+                'fruit.apple': "Apfel",
+                'fruit.lip': "Großlippen-Frucht",
+                'fruit.bbell': "Glockenblume",
+                'fruit.cactus': "Kaktus",
+                'fruit.carrot': "Karotte",
+                'fruit.chomper': "Beißer",
+                'fruit.dandelion': "Löwenzahn",
+                'fruit.gberry': "Goldbeere",
+                'fruit.iron': "Eisenholz-Frucht",
+                'fruit.pea': "Erbse",
+                'fruit.pitcher': "Kannenpflanze",
+                'fruit.pumpkin': "Kürbis",
+                'fruit.pbell': "Rosaglocke",
+                'fruit.raffle': "Rafflesia",
+                'fruit.mushroom': "Roter Pilz",
+                'fruit.saturn': "Saturn-Pfirsich",
+                'fruit.sakura': "Sakura",
+                'fruit.lotus': "Schneelotus",
+                'fruit.strawberry': "Erdbeere",
+                'fruit.melon': "Wintermelone",
+                'mutation.none': "Keine",
+                'mutation.gold': "Gold",
+                'mutation.prismatic': "Prismatisch",
+                'weather.dust': "Staub",
+                'weather.lightning': "Blitz",
+                'weather.rainbow': "Regenbogen",
+                'weather.terror': "Terror",
+                'weather.air': "Luft",
+                'weather.hazy': "Neblig",
+                'weather.cold': "Kalt",
+                'weather.moist': "Feucht"
+            },
+            es: {
+                title: "Ulastate - Calculadora de Valor de Frutas",
+                'label.fruitType': "Tipo de Fruta",
+                'option.selectFruit': "Seleccione una fruta...",
+                'label.weight': "Peso",
+                'placeholder.weight': "ej., 10.2 o 5.96",
+                'label.mutation': "Mutación",
+                'label.weatherEffects': "Efectos Climáticos (seleccione varios)",
+                'result.fruitValue': "Valor de Fruta",
+                'result.potential': "Potencial",
+                'alert.fillFields': "Por favor, complete todos los campos obligatorios con valores válidos.",
+                'fruit.apple': "Manzana",
+                'fruit.lip': "Fruta de Labios Grandes",
+                'fruit.bbell': "Campanilla Azul",
+                'fruit.cactus': "Cactus",
+                'fruit.carrot': "Zanahoria",
+                'fruit.chomper': "Masticador",
+                'fruit.dandelion': "Diente de León",
+                'fruit.gberry': "Baya Dorada",
+                'fruit.iron': "Fruta de Palo de Hierro",
+                'fruit.pea': "Guisante",
+                'fruit.pitcher': "Planta Jarra",
+                'fruit.pumpkin': "Calabaza",
+                'fruit.pbell': "Campanilla Rosa",
+                'fruit.raffle': "Rafflesia",
+                'fruit.mushroom': "Seta Roja",
+                'fruit.saturn': "Durazno Saturno",
+                'fruit.sakura': "Sakura",
+                'fruit.lotus': "Loto de Nieve",
+                'fruit.strawberry': "Fresa",
+                'fruit.melon': "Melón de Invierno",
+                'mutation.none': "Ninguna",
+                'mutation.gold': "Oro",
+                'mutation.prismatic': "Prismático",
+                'weather.dust': "Polvo",
+                'weather.lightning': "Relámpago",
+                'weather.rainbow': "Arcoíris",
+                'weather.terror': "Terror",
+                'weather.air': "Aire",
+                'weather.hazy': "Brumoso",
+                'weather.cold': "Frío",
+                'weather.moist': "Húmedo"
+            },
+            fr: {
+                title: "Ulastate - Calculateur de Valeur des Fruits",
+                'label.fruitType': "Type de Fruit",
+                'option.selectFruit': "Sélectionnez un fruit...",
+                'label.weight': "Poids",
+                'placeholder.weight': "ex., 10.2 ou 5.96",
+                'label.mutation': "Mutation",
+                'label.weatherEffects': "Effets Météorologiques (sélectionnez plusieurs)",
+                'result.fruitValue': "Valeur du Fruit",
+                'result.potential': "Potentiel",
+                'alert.fillFields': "Veuillez remplir tous les champs obligatoires avec des valeurs valides.",
+                'fruit.apple': "Pomme",
+                'fruit.lip': "Fruit à Grosses Lèvres",
+                'fruit.bbell': "Campanule Bleue",
+                'fruit.cactus': "Cactus",
+                'fruit.carrot': "Carotte",
+                'fruit.chomper': "Broyeur",
+                'fruit.dandelion': "Pissenlit",
+                'fruit.gberry': "Baie Dorée",
+                'fruit.iron': "Fruit de Bois de Fer",
+                'fruit.pea': "Pois",
+                'fruit.pitcher': "Plante Carnivore",
+                'fruit.pumpkin': "Citrouille",
+                'fruit.pbell': "Campanule Rose",
+                'fruit.raffle': "Rafflesia",
+                'fruit.mushroom': "Champignon Rouge",
+                'fruit.saturn': "Pêche de Saturne",
+                'fruit.sakura': "Sakura",
+                'fruit.lotus': "Lotus des Neiges",
+                'fruit.strawberry': "Fraise",
+                'fruit.melon': "Melon d'Hiver",
+                'mutation.none': "Aucune",
+                'mutation.gold': "Or",
+                'mutation.prismatic': "Prismatique",
+                'weather.dust': "Poussière",
+                'weather.lightning': "Foudre",
+                'weather.rainbow': "Arc-en-ciel",
+                'weather.terror': "Terreur",
+                'weather.air': "Air",
+                'weather.hazy': "Brumeux",
+                'weather.cold': "Froid",
+                'weather.moist': "Humide"
+            }
+        };
+
+        // Current language
+        // Current language - will be set in DOMContentLoaded
+        let currentLanguage = 'en';
+
+        // Translation function
+        function t(key) {
+            return translations[currentLanguage][key] || translations['en'][key] || key;
+        }
+
+        // Update page translations
+        function updateTranslations() {
+            document.title = t('title');
+            document.documentElement.lang = currentLanguage;
+
+            // Update all elements with data-i18n attribute
+            // Note: Setting textContent on select option elements updates the visible text
+            // while preserving the value attribute for form submission
+            document.querySelectorAll('[data-i18n]').forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                element.textContent = t(key);
+            });
+
+            // Update placeholders
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(element => {
+                const key = element.getAttribute('data-i18n-placeholder');
+                element.placeholder = t(key);
+            });
+        }
+
+        // Initialize language on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set current language from localStorage or default to 'en'
+            currentLanguage = localStorage.getItem('language') || 'en';
+            
+            // Set the dropdown to the current language
+            const languageSelect = document.getElementById('languageSelect');
+            languageSelect.value = currentLanguage;
+            
+            // Apply translations
+            updateTranslations();
+            
+            // Language selector event listener
+            languageSelect.addEventListener('change', function() {
+                const lang = this.value;
+                currentLanguage = lang;
+                localStorage.setItem('language', lang);
+                
+                // Update translations
+                updateTranslations();
+                
+                // Reduce opacity after selection
+                const selector = document.querySelector('.language-selector');
+                selector.style.opacity = '1';
+                setTimeout(() => {
+                    selector.style.opacity = '0.33';
+                }, 1000);
+            });
+        });
+
         // Base prices for each fruit type
         const basePrices = {
             sakura: 5,
@@ -407,7 +685,7 @@
 
             // Validate inputs
             if (!fruitType || isNaN(weight) || weight <= 0) {
-                alert('Please fill in all required fields with valid values.');
+                alert(t('alert.fillFields'));
                 return;
             }
 
